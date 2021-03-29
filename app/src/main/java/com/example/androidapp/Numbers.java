@@ -9,6 +9,10 @@ public class Numbers {
 
     public Numbers() {
         this.numbers = new ArrayList<>();
+        for (int i = 0; i < 100; ++i) {
+            NumberModel numberModel = new NumberModel(i + 1);
+            this.numbers.add(numberModel);
+        }
     }
 
     public int getLastNumber() {
