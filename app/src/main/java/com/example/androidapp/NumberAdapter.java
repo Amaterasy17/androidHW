@@ -11,9 +11,10 @@ import java.util.ArrayList;
 
 public class NumberAdapter extends RecyclerView.Adapter<NumberViewHolder> {
     public ArrayList<NumberModel> data = Numbers.getInstance().getData();
+    public ViewGroup view;
 
-    public NumberAdapter() {
-
+    public NumberAdapter(ViewGroup viewGroup) {
+        this.view = viewGroup;
     }
 
     @NonNull
@@ -28,6 +29,7 @@ public class NumberAdapter extends RecyclerView.Adapter<NumberViewHolder> {
         NumberModel numberModel = data.get(position);
 
         holder.bind(numberModel);
+        holder.setParent(view);
     }
 
     @Override
