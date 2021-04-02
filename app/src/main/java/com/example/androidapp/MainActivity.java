@@ -31,14 +31,8 @@ public class MainActivity extends AppCompatActivity implements NumbersFragment.L
                     .commitNow();
         }
 
-//        fragmentManager.beginTransaction()
-//                .add(R.id.fragment_view, OneNumberFragment.class, null)
-//                .commit();
-//        ChangeView(numberModel);
-
         OneNumberFragment fragment = (OneNumberFragment) fragmentManager.findFragmentById(R.id.fragment_view);
         View oneNumber = findViewById(R.id.one_number);
-//        View oneNumber = fragment.getView();
         TextView text = oneNumber.findViewById(R.id.number_text);
         text.setText(String.valueOf(numberModel.number));
         text.setTextColor(numberModel.color);
