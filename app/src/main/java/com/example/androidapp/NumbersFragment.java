@@ -1,7 +1,9 @@
 package com.example.androidapp;
 
+import android.content.Context;
 import android.os.Bundle;
 
+import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -18,28 +20,38 @@ import android.widget.Button;
  */
 public class NumbersFragment extends Fragment {
 
-    // TODO: Rename parameter arguments, choose names that match
-    // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
 
-    // TODO: Rename and change types of parameters
     private String mParam1;
     private String mParam2;
 
+    public ListenerClickNumber listenerClickNumber;
+
     public NumbersFragment() {
-        super(R.layout.fragment_numbers);
+
     }
 
-    /**
-     * Use this factory method to create a new instance of
-     * this fragment using the provided parameters.
-     *
-     * @param param1 Parameter 1.
-     * @param param2 Parameter 2.
-     * @return A new instance of fragment NumbersFragment.
-     */
-    // TODO: Rename and change types and number of parameters
+    @Override
+    public void onAttach(@NonNull Context context) {
+        super.onAttach(context);
+        if (context instanceof ListenerClickNumber) {
+            listenerClickNumber = (ListenerClickNumber) context;
+        } else {
+            throw new IllegalStateException("must implement ListenerClickNumber interface");
+        }
+    }
+
+    public interface ListenerClickNumber {
+        public void listenerOnClick(int number);
+    }
+
+    @Override
+    public void onDestroy() {
+        listenerClickNumber = null;
+        super.onDestroy();
+    }
+
     public static NumbersFragment newInstance(String param1, String param2) {
         NumbersFragment fragment = new NumbersFragment();
         Bundle args = new Bundle();
@@ -68,7 +80,7 @@ public class NumbersFragment extends Fragment {
 
         recyclerView.setLayoutManager(new GridLayoutManager(view.getContext(), numberColumn.getNumberColumns(container.getContext())));
 
-        NumberAdapter adapter = new NumberAdapter(container);
+        NumberAdapter adapter = new NumberAdapter(container, listenerClickNumber);
         recyclerView.setAdapter(adapter);
 
         Button button = view.findViewById(R.id.add);

@@ -13,6 +13,7 @@ public class NumberViewHolder extends RecyclerView.ViewHolder {
 
     private TextView number;
     private ViewGroup parent;
+    private NumbersFragment.ListenerClickNumber listenerClickNumber;
 
     public NumberViewHolder(@NonNull View itemView) {
         super(itemView);
@@ -22,23 +23,32 @@ public class NumberViewHolder extends RecyclerView.ViewHolder {
     public void bind(NumberModel numberModel) {
         this.number.setText(String.valueOf(numberModel.number));
         this.number.setTextColor(numberModel.color);
-
         this.number.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                FrameLayout frameLayout = parent.findViewById(R.id.fragment_numbers);
-                frameLayout.setVisibility(View.GONE);
-                View view =  LayoutInflater.from(parent.getContext()).inflate(R.layout.fragment_one_number, parent, false);
-                TextView number = view.findViewById(R.id.number);
-                number.setTextColor(numberModel.color);
-                number.setText(String.valueOf(numberModel.number));
-                view.invalidate();
-                view.setVisibility(View.VISIBLE);
+                listenerClickNumber.listenerOnClick(numberModel.number);
             }
         });
+//        this.number.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                FrameLayout frameLayout = parent.findViewById(R.id.fragment_numbers);
+//                frameLayout.setVisibility(View.GONE);
+//                View view =  LayoutInflater.from(parent.getContext()).inflate(R.layout.fragment_one_number, parent, false);
+//                TextView number = view.findViewById(R.id.number);
+//                number.setTextColor(numberModel.color);
+//                number.setText(String.valueOf(numberModel.number));
+//                view.invalidate();
+//                view.setVisibility(View.VISIBLE);
+//            }
+//        });
     }
 
     public void setParent(ViewGroup viewGroup) {
         this.parent = viewGroup;
+    }
+
+    public void setListenerClickNumber(NumbersFragment.ListenerClickNumber listener) {
+        this.listenerClickNumber = listener;
     }
 }

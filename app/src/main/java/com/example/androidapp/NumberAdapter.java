@@ -12,9 +12,11 @@ import java.util.ArrayList;
 public class NumberAdapter extends RecyclerView.Adapter<NumberViewHolder> {
     public ArrayList<NumberModel> data = Numbers.getInstance().getData();
     public ViewGroup view;
+    public NumbersFragment.ListenerClickNumber listener;
 
-    public NumberAdapter(ViewGroup viewGroup) {
+    public NumberAdapter(ViewGroup viewGroup, NumbersFragment.ListenerClickNumber listener) {
         this.view = viewGroup;
+        this.listener = listener;
     }
 
     @NonNull
@@ -28,6 +30,7 @@ public class NumberAdapter extends RecyclerView.Adapter<NumberViewHolder> {
     public void onBindViewHolder(@NonNull NumberViewHolder holder, int position) {
         NumberModel numberModel = data.get(position);
 
+        holder.setListenerClickNumber(listener);
         holder.bind(numberModel);
         holder.setParent(view);
     }
