@@ -4,13 +4,14 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
-import androidx.recyclerview.widget.GridLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
 
 import android.os.Bundle;
 import android.view.View;
-import android.widget.Button;
 import android.widget.TextView;
+
+import com.example.androidapp.fragments.NumbersFragment;
+import com.example.androidapp.fragments.OneNumberFragment;
+import com.example.androidapp.recycler.NumberModel;
 
 public class MainActivity extends AppCompatActivity implements NumbersFragment.ListenerClickNumber {
 
@@ -25,8 +26,7 @@ public class MainActivity extends AppCompatActivity implements NumbersFragment.L
             Fragment frag = fragmentManager.findFragmentById(R.id.fragment_view);
             FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
             fragmentTransaction
-                    .remove(frag)
-                    .add(R.id.fragment_view, new OneNumberFragment())
+                    .replace(R.id.fragment_view, new OneNumberFragment())
                     .setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE)
                     .commitNow();
         }
@@ -51,7 +51,7 @@ public class MainActivity extends AppCompatActivity implements NumbersFragment.L
         if (savedInstanceState == null) {
             if (getSupportFragmentManager().findFragmentById(R.id.fragment_view) == null) {
                 getSupportFragmentManager().beginTransaction()
-                        .add(R.id.fragment_view, NumbersFragment.class, null)
+                        .replace(R.id.fragment_view, NumbersFragment.class, null)
                         .commit();
             }
 

@@ -1,13 +1,14 @@
-package com.example.androidapp;
+package com.example.androidapp.recycler;
 
-import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.FrameLayout;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
+
+import com.example.androidapp.fragments.NumbersFragment;
+import com.example.androidapp.R;
 
 public class NumberViewHolder extends RecyclerView.ViewHolder {
 

@@ -1,4 +1,4 @@
-package com.example.androidapp;
+package com.example.androidapp.recycler;
 
 import android.view.LayoutInflater;
 import android.view.View;
@@ -6,6 +6,9 @@ import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
+
+import com.example.androidapp.fragments.NumbersFragment;
+import com.example.androidapp.R;
 
 import java.util.ArrayList;
 

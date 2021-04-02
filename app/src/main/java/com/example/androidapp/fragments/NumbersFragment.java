@@ -1,4 +1,4 @@
-package com.example.androidapp;
+package com.example.androidapp.fragments;
 
 import android.content.Context;
 import android.os.Bundle;
@@ -13,6 +13,11 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 
+import com.example.androidapp.recycler.Columns;
+import com.example.androidapp.recycler.Numbers;
+import com.example.androidapp.R;
+import com.example.androidapp.recycler.NumberAdapter;
+
 /**
  * A simple {@link Fragment} subclass.
  * Use the {@link NumbersFragment#newInstance} factory method to
@@ -22,6 +27,7 @@ public class NumbersFragment extends Fragment {
 
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
+    public static final String STATE = "state";
 
     private String mParam1;
     private String mParam2;
@@ -45,6 +51,12 @@ public class NumbersFragment extends Fragment {
     public interface ListenerClickNumber {
         public void listenerOnClick(int number);
     }
+
+//    @Override
+//    public void onSaveInstanceState(Bundle outState) {
+//        super.onSaveInstanceState(outState);
+//        outState.putParcelableArrayList(STATE, (ArrayList<? extends Parcelable>) Numbers.getInstance().getData());
+//    }
 
     @Override
     public void onDestroy() {

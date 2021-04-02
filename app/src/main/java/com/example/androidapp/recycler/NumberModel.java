@@ -1,4 +1,4 @@
-package com.example.androidapp;
+package com.example.androidapp.recycler;
 
 import android.graphics.Color;
 
