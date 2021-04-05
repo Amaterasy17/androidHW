@@ -13,6 +13,7 @@ import android.widget.TextView;
 
 import com.example.androidapp.MainActivity;
 import com.example.androidapp.R;
+import com.example.androidapp.recycler.NumberModel;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -21,8 +22,9 @@ import com.example.androidapp.R;
  */
 public class OneNumberFragment extends Fragment {
 
-    // TODO: Rename parameter arguments, choose names that match
-    // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
+    public static final String STATE = "state";
+    private TextView numberText;
+
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
 
@@ -62,10 +64,29 @@ public class OneNumberFragment extends Fragment {
     }
 
     @Override
+    public void onSaveInstanceState(Bundle outState) {
+        super.onSaveInstanceState(outState);
+        outState.putString(STATE, numberText.getText().toString());
+    }
+
+    private void restoreState(Bundle savedInstanceState) {
+        if (savedInstanceState != null) {
+            String string = savedInstanceState.getString(STATE);
+            int number = Integer.parseInt(string);
+            NumberModel numberModel = new NumberModel(number);
+            numberText.setText(string);
+            numberText.setTextColor(numberModel.color);
+        }
+    }
+
+
+    @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_one_number, container, false);
         TextView currentNumber = view.findViewById(R.id.number);
+        this.numberText = view.findViewById(R.id.number_text);
+        restoreState(savedInstanceState);
 
         Button back = view.findViewById(R.id.back);
         back.setOnClickListener(new View.OnClickListener() {
